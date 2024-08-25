@@ -52,5 +52,5 @@ async def run_test(num_logs):
             print(f"Failed inserts: {num_logs - successful_inserts}")
 
 if __name__ == "__main__":
-    num_logs = 1000  # Number of logs to insert
+    num_logs = 100000  # Number of logs to insert
     asyncio.run(run_test(num_logs))

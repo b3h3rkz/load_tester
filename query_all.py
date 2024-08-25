@@ -6,7 +6,16 @@ import json
 async def send_request(session, url, data):
     try:
         async with session.post(url, json=data) as response:
-            return await response.json()
+            response_text = await response.text()
+            if response_text:
+                return json.loads(response_text)
+            else:
+                print("Error: Empty response received from server")
+                return None
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON: {str(e)}")
+        print(f"Raw response: {response_text}")
+        return None
     except Exception as e:
         print(f"Error in request: {str(e)}")
         return None
